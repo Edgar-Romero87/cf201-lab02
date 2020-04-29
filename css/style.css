@@ -1,0 +1,69 @@
+*{
+  font-family: 'Droid Mono', 'Courier New', Courier, monospace;
+}
+
+body{
+  background-color: rgb(0, 48, 48);
+}
+
+a{
+  text-decoration: unset;
+  color: rgb(0, 185, 185);
+}
+
+header{
+  background-color: rgb(0, 72, 72);
+}
+
+h1{
+  font-size: 450%;
+  font-family: 'Franklin Gothic', 'Trebuchet MS', Arial;
+  font-weight: 900;
+  text-shadow: saddlebrown;
+  background-color: rgb(0, 48, 48);
+  color: rgb(221, 185, 68);
+  padding-left: 2%;
+  padding-bottom: 1%;
+
+}
+
+nav{
+  padding: 2%;
+}
+
+nav a{
+  color: rgb(0, 48, 48);
+  background-color: rgb(255, 240, 29);
+  padding: 1%;
+}
+
+main{
+  background-color: rgb(0, 24, 24);
+  color: rgb(236, 212, 139);
+  padding-bottom: 5%;
+}
+
+section{
+  margin: 2%;
+  padding: 1%;
+  background-color: rgb(0, 36, 36);
+  font-size: 120%;
+}
+
+#about-me{
+  padding: 1%;
+  font-size: 200%;
+  font-weight: 700;
+  background-color: rgb(0, 36, 36);
+  margin-left: 1%;
+  margin-bottom: 1%;
+  margin-right: 67%;
+
+}
+
+footer{
+  background-color: rgb(0, 48, 48);
+  color: rgb(221, 185, 68);
+  padding: 2%;
+  text-align: right;
+}

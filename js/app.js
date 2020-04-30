@@ -4,7 +4,7 @@
 // Global Variables
 var username; // name of user
 var quizAnswers = [false,false,false,false,false,false]; // player scorecard.
-
+var playerScore=0;
 
 // Functions
 // Locks user into loop until proper yes/no answer is received.
@@ -14,7 +14,7 @@ function quizAskQuestion(question){
   while ((answer !== 'y') && (answer !== 'yes') && (answer !== 'n') && (answer !== 'no')){
     answer = prompt("Sorry, but I didn't understand that answer. " + question + " answer: (yes/no) or (y/n)").toLowerCase();
   }
-  if ((answer === 'yes') || (answer == 'y')){
+  if ((answer === 'yes') || (answer === 'y')){
     return true;
   }
   else {
@@ -41,37 +41,44 @@ function checkAnswer(answer, correctAnswer, questionNumber){
 
 // Greet the user and get their name.
 username = prompt("Welcome! What is your name?");
-if (confirm("Thanks for visiting my page, " + username + "! I'd like to invite you to play a game with me. I'm going to ask you five questions about the information on my page. You can retake the quiz as many times as you like.")){
 
+//this game will ask the user 4 yes or no questions for record the result
+function game(){
+  if (confirm("Thanks for visiting my page, " + username + "! I'd like to invite you to play a game with me. I'm going to ask you five questions about the information on my page. You can retake the quiz as many times as you like.")){
+  
+    
+    // Do I like school? lol Correct Answer: no.
+    var doILikeSchool = quizAskQuestion("Am I a big fan of traditional schooling?");
+    checkAnswer(doILikeSchool, false, 0);
+    
+    // But do I like learning though? Correct Answer: no.
+    var doIlikeLearning = quizAskQuestion("I'd rather have a high paying job where I didn't have to keep learning new things. Is that true?");
+    checkAnswer(doIlikeLearning, false, 1);
+    
+    // Play with Python much? Correct Answer: yes.
+    var doIKnowPython = quizAskQuestion("Is Python a programming language that I'm at least familiar with?");
+    checkAnswer(doIKnowPython, true, 2);
+    
+    // Why so serious? Do I make games? Correct Answer: no.
+    var firstProjects = quizAskQuestion("My first coding projects were games. Is that true?");
+    checkAnswer(firstProjects, false, 3);
+  
+    // Do I like to stay put? Correct answer: no.
+    var stayingPut = quizAskQuestion("Do I tend to stay employed at one job for as long as possible?");
+    checkAnswer(firstProjects, false, 4);
+  }
+}
+
+  
+ 
+// Lucky number game.
+function luckyNumberGame(){
+  //console.log(luckyNumber);
   // Extra variables for the game.
   var luckyNumber = 7;
   //var luckyNumber = parseInt(Math.random()*10);
   var guessLuckyNumber;
 
-  // Do I like school? lol Correct Answer: no.
-  var doILikeSchool = quizAskQuestion("Am I a big fan of traditional schooling?");
-  checkAnswer(doILikeSchool, false, 0);
-  
-  // But do I like learning though? Correct Answer: no.
-  var doIlikeLearning = quizAskQuestion("I'd rather have a high paying job where I didn't have to keep learning new things. Is that true?");
-  checkAnswer(doIlikeLearning, false, 1);
-  
-  // Play with Python much? Correct Answer: yes.
-  var doIKnowPython = quizAskQuestion("Is Python a programming language that I'm at least familiar with?");
-  checkAnswer(doIKnowPython, true, 2);
-  
-  // Why so serious? Do I make games? Correct Answer: no.
-  var firstProjects = quizAskQuestion("My first coding projects were games. Is that true?");
-  checkAnswer(firstProjects, false, 3);
-
-  // Do I like to stay put? Correct answer: no.
-  var stayingPut = quizAskQuestion("Do I tend to stay employed at one job for as long as possible?");
-  checkAnswer(firstProjects, false, 4);
-
-  
- 
-  // Lucky number game.
-  console.log(luckyNumber);
   for (var i=0; i<4; i++){
     if (i===0){
       guessLuckyNumber = prompt("Now lets try something different. I am thinking of a number between 1-10. Can you guess that number? You have 4 guesses.");
@@ -84,13 +91,13 @@ if (confirm("Thanks for visiting my page, " + username + "! I'd like to invite y
       guessLuckyNumber = prompt("Was that a number between 1-10? You need to enter any whole number in the range of 1 through 10.");
     }
 
-    if (luckyNumber == guessLuckyNumber){
+    if (luckyNumber === parseInt(guessLuckyNumber)){
       alert("Wow! Good guess! " + guessLuckyNumber + " was correct.");
       quizAnswers[5] = true;
       break;
     }
     else if (i === 3){
-      alert("Sorry, that was wrong, and you're all out of guesses.")
+      alert("Sorry, that was wrong, and you're all out of guesses.");
     }
     else if (guessLuckyNumber < luckyNumber){
       alert("Too low! Try again.");
@@ -101,8 +108,12 @@ if (confirm("Thanks for visiting my page, " + username + "! I'd like to invite y
     
     
   }
+  
+}
 
-  // A guessing game with multiple correct answers.
+// A guessing game with multiple correct answers.
+
+function developerGuessingGame(){
   var famousDevelopers = [['Dennis Ritchie','Dennis MacAlistair Ritchie was an American computer scientist who is credited for shaping and pioneering the digital era. He created the most commonly used C programming language that is used today in various software applications, embedded system development, operating systems, and has influenced most modern programming languages.'],
   ['Linus Torvalds','Linus Benedict Torvalds s a Finnish American software engineer, who was the principal driving force behind the development of the Linux kernel. Its creation itself is attributed towards him and he later became the chief architect of the Linux kernel, and is now the project’s coordinator.'],
   ['Bjarne Stroustrup','Bjarne Stroustrup is a Danish computer scientist who is credited for the creation and the development of the widely used and highly successful C++ programming language. He not only invented it, but also evolved it, all by himself, by writing its early definitions, producing its first implementation, formulating its design criteria, designing all its major facilities, processing extension proposals for standards committee and its standard textbook.'],
@@ -148,17 +159,31 @@ if (confirm("Thanks for visiting my page, " + username + "! I'd like to invite y
         alert("Darn! You're all out of guesses. Thanks for playing!");
         devGuessingGameState = false;
       }
-      
-    }
+    }  
   }
+}
 
-  // Calculate player score and thank them for playing.
-  var playerScore=0;
+
+// Calculate player score and thank them for playing.
+function score(){
+  
   for (var i=0; i<quizAnswers.length; i++){
     if (quizAnswers[i]){
       playerScore++;
     }
   }
-
-  alert("Thanks for playing with me, " + username + "! You scored " + playerScore + " correct out of 7 questions. You can retake the quiz any time you like by clicking the link at the top of the page.")
 }
+
+
+function reportScore(){
+  score();
+  alert("Thanks for playing with me, " + username + "! You scored " + playerScore + " correct out of 7 questions. You can retake the quiz any time you like by clicking the link at the top of the page.");
+  playerScore=0;
+  
+}
+
+
+game();
+luckyNumberGame();
+developerGuessingGame();
+reportScore();
